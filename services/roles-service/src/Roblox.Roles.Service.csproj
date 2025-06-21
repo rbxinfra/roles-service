@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\libs\roles\src\Roblox.Roles.Logic.csproj" />
+	  <ProjectReference Include="..\..\..\libs\roles\src\Roblox.Roles.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -5,14 +5,14 @@ using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// Request to get a RoleSet by Name.
+/// Request to get all RoleSets a User has.
 /// </summary>
 [DataContract]
-public class GetRoleSetRequest
+public class GetUserRoleSetsRequest
 {
     /// <summary>
-    /// The Name of the RoleSet.
+    /// The ID of the User.
     /// </summary>
-    [FromQuery(Name = "name")]
-    public string Name { get; set; }
+    [FromQuery(Name = "userId")]
+    public long userId { get; set; }
 }

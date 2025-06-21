@@ -18,5 +18,5 @@ internal class Settings : BaseSettingsProvider<Settings>, IServiceSettings
     public LogLevel LogLevel => GetOrDefault(nameof(LogLevel), LogLevel.Information);
 
     /// <inheritdoc cref="IServiceSettings.VerboseErrorsEnabled"/>
-    public bool VerboseErrorsEnabled => GetOrDefault(nameof(VerboseErrorsEnabled), true);
+    public bool VerboseErrorsEnabled => GetOrDefault(nameof(VerboseErrorsEnabled), false);
 }

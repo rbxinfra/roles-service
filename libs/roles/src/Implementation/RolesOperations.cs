@@ -2,6 +2,7 @@
 
 using System;
 
+using EventLog;
 using Platform.Membership;
 
 /// <summary>
@@ -44,23 +45,25 @@ public class RolesOperations : IRolesOperations
     /// <summary>
     /// Initializes a new instance of <see cref="RolesOperations"/>.
     /// </summary>
+    /// <param name="logger">The <see cref="ILogger"/> to use.</param>
     /// <param name="membershipDomainFactories">The <see cref="MembershipDomainFactories"/> to use.</param>
     /// <exception cref="ArgumentNullException">
     /// - <paramref name="membershipDomainFactories"/> is null.
     /// </exception>
-    public RolesOperations(MembershipDomainFactories membershipDomainFactories)
+    public RolesOperations(ILogger logger, MembershipDomainFactories membershipDomainFactories)
     {
+        ArgumentNullException.ThrowIfNull(logger, nameof(logger));
         ArgumentNullException.ThrowIfNull(membershipDomainFactories, nameof(membershipDomainFactories));
 
-        AddRoleMember      = new(membershipDomainFactories);
-        CreateRoleSet      = new();
-        GetRoleSets        = new();
-        GetUserRoleSets    = new();
-        GetRoleMembers     = new();
-        GetRoleSet         = new();
-        GetUserRoleSet     = new();
-        RemoveRoleMember   = new();
-        RoleContainsMember = new();
-        UpdateRoleSet      = new();
+        AddRoleMember      = new(logger, membershipDomainFactories);
+        CreateRoleSet      = new(logger);
+        GetRoleSets        = new(logger);
+        GetUserRoleSets    = new(logger);
+        GetRoleMembers     = new(logger);
+        GetRoleSet         = new(logger);
+        GetUserRoleSet     = new(logger);
+        RemoveRoleMember   = new(logger);
+        RoleContainsMember = new(logger);
+        UpdateRoleSet      = new(logger);
     }
 }

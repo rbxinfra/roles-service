@@ -15,16 +15,8 @@ public class ModifyRoleMemberRequest
     public long UserID { get; set; }
 
     /// <summary>
-    /// The ID of the RoleSet.
-    /// </summary>
-    /// <remarks>Optional if <see cref="Name"/> is set.</remarks>
-    [DataMember(Name = "id")]
-    public int? ID { get; set; }
-
-    /// <summary>
     /// The Name of the RoleSet.
     /// </summary>
-    /// <remarks>Optional if <see cref="ID"/> is set.</remarks>
     [DataMember(Name = "name")]
     public string Name { get; set; }
 }

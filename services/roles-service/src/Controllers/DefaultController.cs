@@ -80,10 +80,10 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.GetRoleMembers, request);
 
     /// <summary>
-    /// Gets a roleset by the id or name.
+    /// Gets a roleset by the name.
     /// </summary>
     /// <param name="request">The <see cref="GetRoleSetRequest"/></param>
-    /// <response code="400">The roleset id or name is invalid.</response>
+    /// <response code="400">The roleset name is invalid.</response>
     /// <response code="500">An error occurred.</response>
     /// <response code="503">Service unavailable.</response>
     [HttpGet]
@@ -108,8 +108,9 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.GetRoleSets);
 
     /// <summary>
-    /// Gets all user rolesets paged.
+    /// Gets all rolesets a user has.
     /// </summary>
+    /// <response code="400">The user id is invalid.</response>
     /// <response code="500">An error occurred.</response>
     /// <response code="503">Service unavailable.</response>
     [HttpGet]
@@ -117,11 +118,11 @@ public class DefaultController : Controller
     [ProducesResponseType(200, Type = typeof(ICollection<UserRoleSetPayload>))]
     [ProducesResponseType(500)]
     [ProducesResponseType(503)]
-    public IActionResult GetUserRoleSets(GetUserRoleSetsPagedRequest request)
+    public IActionResult GetUserRoleSets(GetUserRoleSetsRequest request)
         => _OperationExecutor.Execute(_RolesOperations.GetUserRoleSets, request);
 
     /// <summary>
-    /// Gets a user roleset by the user id and roleset id or name.
+    /// Gets a user roleset by the user id and roleset name.
     /// </summary>
     /// <param name="request">The <see cref="GetUserRoleSetRequest"/></param>
     /// <response code="400">The user id or roleset name is invalid.</response>
@@ -157,7 +158,7 @@ public class DefaultController : Controller
     /// <response code="400">The roleset does not exist.</response>
     /// <response code="500">An error occurred.</response>
     /// <response code="503">Service unavailable.</response>
-    [HttpPost]
+    [HttpGet]
     [Route($"/v1/{nameof(RoleContainsMember)}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(500)]
