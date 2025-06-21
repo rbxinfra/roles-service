@@ -1,0 +1,75 @@
+component: roles-service
+
+build:
+  project_file: src/Roblox.Roles.Service.csproj
+  component_directory: ./.deploy
+
+  additional_args:
+    - -p:DockerTag=${{ env.NOMAD_VERSION }}
+
+  docker:
+    docker_file: Dockerfile
+    image_name: docker.artifactory.rbx.com/micro-services/roles-service
+    
+deployment:
+  count: 1
+  namespace: micro-services
+
+  job: ${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service
+
+  vault_policies:
+    - vault_secret_settings_providers_token_reader
+
+  # Passed to the meta section in Nomad
+  meta:
+    ENVIRONMENT: ${{ env.NOMAD_ENVIRONMENT }}
+
+  containers: # Maps to the groups section in Nomad
+    - image: docker.artifactory.rbx.com/micro-services/roles-service
+      resources:
+        cpu: ${{ env.NOMAD_CPU }}
+        ram: ${{ env.NOMAD_RAM }}
+      network:
+        ports:
+          http: 
+            to: 5000
+      services:
+        - name: ${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-http
+          port: http
+          tags:
+            - ${{ env.NOMAD_ENVIRONMENT }}
+            - Roblox.Roles.Service
+            - Roles
+            - "traefik.enable=true"
+            - "traefik.http.routers.${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-http.rule=(Host(`roles.api.sitetest4.robloxlabs.com`))"
+            - "traefik.http.routers.${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-http.entrypoints=http"
+          checks:
+            - type: http
+              path: /health
+ 
+        - name: ${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-https
+          port: http
+          tags:
+            - ${{ env.NOMAD_ENVIRONMENT }}
+            - Roblox.Roles.Service
+            - Roles
+            - "traefik.enable=true"
+            - "traefik.http.routers.${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-https.rule=(Host(`roles.api.sitetest4.robloxlabs.com`))"
+            - "traefik.http.routers.${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-https.entrypoints=https"
+            - "traefik.http.routers.${{ env.NOMAD_ENVIRONMENT }}-roblox-roles-service-https.tls=true"
+          checks:
+            - type: http
+              path: /health
+              
+      volumes:
+        - "/etc/ssl/certs:/etc/ssl/certs:ro"
+      config_maps:
+        - destination: secrets/file.env
+          env: true
+          on_change: restart
+          data: |
+            ASPNETCORE_URLS="http://+:5000"
+            AppName=roles-service
+            DEFAULT_LOG_LEVEL=Information
+            VAULT_ADDR="http://vault.service.consul:8200"
+            VAULT_TOKEN="{{ with secret "secret/teams/applications/vault-providers" }}{{ .Data.vault_token }}{{ end }}"
