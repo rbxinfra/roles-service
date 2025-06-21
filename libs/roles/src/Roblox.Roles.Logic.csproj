@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>Logic and operations implementation for Roblox.Roles.Service</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Roblox.Roles.Service" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Roblox.Caching" Version="1.2.4" />
+		<PackageReference Include="Roblox.Data" Version="1.2.4" />
+		<PackageReference Include="Roblox.Entities.Mssql" Version="1.2.4" />
+		<PackageReference Include="Roblox.MssqlDatabases" Version="1.2.4" />
+		<PackageReference Include="Roblox.Operations" Version="1.2.4" />
+		<PackageReference Include="Roblox.Platform.Membership" Version="1.2.4" />
+	</ItemGroup>
+
+</Project>
