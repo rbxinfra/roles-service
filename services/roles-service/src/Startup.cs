@@ -33,12 +33,4 @@ public class Startup : HttpStartupBase
 
         services.AddSingleton<IRolesOperations, RolesOperations>();
     }
-
-#if DEBUG
-    /// <inheritdoc cref="StartupBase.ConfigureAuthority(IServiceProvider)"/>
-    public override Api.ControlPlane.IAuthority ConfigureAuthority(IServiceProvider services)
-    {
-        return new Api.ControlPlane.MockAuthority();
-    }
-#endif
 }
