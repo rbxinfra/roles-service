@@ -33,10 +33,8 @@ public class AddRoleMemberOperation : IResultOperation<ModifyRoleMemberRequest, 
 
         RoleSet roleSet = null;
 
-        if (request.ID.HasValue)
-            roleSet = RoleSet.Get(request.ID.Value);
-        if (!string.IsNullOrWhiteSpace(request.Name))
-            roleSet = RoleSet.GetByName(request.Name);
+        if (request.ID.HasValue) roleSet = RoleSet.Get(request.ID.Value);
+        if (!string.IsNullOrWhiteSpace(request.Name)) roleSet = RoleSet.GetByName(request.Name);
 
         if (roleSet == null) return (null, new OperationError(RoleSetError.RoleSetDoesNotExist));
 
