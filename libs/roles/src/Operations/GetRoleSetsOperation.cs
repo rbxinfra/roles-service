@@ -11,7 +11,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation to get all role sets.
+/// Operation to get all <see cref="RoleSet"/>.
 /// </summary>
 public class GetRoleSetsOperation : IResultOperation<ICollection<RoleSetPayload>>
 {

@@ -7,14 +7,13 @@ using System.Collections.Generic;
 using EventLog;
 using Operations;
 
-using Enums;
 using Models;
 using Entities;
 
 /// <summary>
-/// Operation to get all role sets a user has.
+/// Operation to get all <see cref="UserRoleSet"/>.
 /// </summary>
-public class GetUserRoleSetsOperation : IResultOperation<GetUserRoleSetsRequest, ICollection<RoleSetPayload>>
+public class GetUserRoleSetsOperation : IResultOperation<ICollection<UserRoleSetPayload>>
 {
     private readonly ILogger _Logger;
 
@@ -31,26 +30,15 @@ public class GetUserRoleSetsOperation : IResultOperation<GetUserRoleSetsRequest,
     }
 
     /// <inheritdoc cref="IResultOperation{TInput, TOutput}"/>
-    public (ICollection<RoleSetPayload> Output, OperationError Error) Execute(GetUserRoleSetsRequest request)
+    public (ICollection<UserRoleSetPayload> Output, OperationError Error) Execute()
     {
-        if (request.userId == default(long)) return new(null, new OperationError(UserRoleSetError.InvalidUserId));
+        _Logger.Information("GetUserRoleSets");
 
-        _Logger.Information("GetUserRoleSets, User ID = {0}", request.userId);
-
-        var userRoleSets = UserRoleSet.GetUserRoleSetsByUserIDPaged(
-            request.userId,
+        var userRoleSets = UserRoleSet.GetAllUserRoleSetsPaged(
             1,
             long.MaxValue
         );
 
-        var result = userRoleSets
-            .Select(userRoleSet =>
-            {
-                var roleSet = RoleSet.Get(userRoleSet.RoleSetID);
-                return new RoleSetPayload(roleSet);
-            })
-            .ToArray();
-
-        return (result, null);
+        return (userRoleSets.Select(userRoleSet => new UserRoleSetPayload(userRoleSet)).ToArray(), null);
     }
 }

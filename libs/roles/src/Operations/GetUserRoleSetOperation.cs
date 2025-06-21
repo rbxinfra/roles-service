@@ -10,7 +10,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation to get a <see cref="UserRoleSet"/> by User ID and <see cref="RoleSet.Name"/>.
+/// Operation to get a <see cref="UserRoleSet"/> by a User ID and <see cref="RoleSet.Name"/>.
 /// </summary>
 public class GetUserRoleSetOperation : IResultOperation<GetUserRoleSetRequest, UserRoleSetPayload>
 {

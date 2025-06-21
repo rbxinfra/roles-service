@@ -10,7 +10,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation to check wether a user has a role.
+/// Operation to check whether a User has a <see cref="RoleSet"/>.
 /// </summary>
 public class RoleContainsMemberOperation : IResultOperation<GetUserRoleSetRequest, bool>
 {

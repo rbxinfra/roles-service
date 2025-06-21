@@ -12,7 +12,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation to get all members of a role set paged.
+/// Operation to get all users with a <see cref="RoleSet"/> paged.
 /// </summary>
 public class GetRoleMembersOperation : IResultOperation<GetRoleMembersPagedRequest, ICollection<RoleMemberPayload>>
 {

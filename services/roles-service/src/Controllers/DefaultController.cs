@@ -36,7 +36,7 @@ public class DefaultController : Controller
     }
 
     /// <summary>
-    /// Grants the specified user a roleset.
+    /// Grants a roleset to a user.
     /// </summary>
     /// <param name="request">The <see cref="ModifyRoleMemberRequest"/></param>
     /// <response code="400">The user or roleset is invalid.</response>
@@ -66,7 +66,7 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.CreateRoleSet, request);
 
     /// <summary>
-    /// Gets all users with the specified roleset.
+    /// Gets all users who have the specified roleset.
     /// </summary>
     /// <response code="400">The roleset does not exist.</response>
     /// <response code="500">An error occurred.</response>
@@ -80,7 +80,7 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.GetRoleMembers, request);
 
     /// <summary>
-    /// Gets a roleset by the name.
+    /// Gets a roleset.
     /// </summary>
     /// <param name="request">The <see cref="GetRoleSetRequest"/></param>
     /// <response code="400">The roleset name is invalid.</response>
@@ -108,7 +108,7 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.GetRoleSets);
 
     /// <summary>
-    /// Gets all rolesets a user has.
+    /// Gets all user rolesets.
     /// </summary>
     /// <response code="400">The user id is invalid.</response>
     /// <response code="500">An error occurred.</response>
@@ -118,8 +118,8 @@ public class DefaultController : Controller
     [ProducesResponseType(200, Type = typeof(ICollection<UserRoleSetPayload>))]
     [ProducesResponseType(500)]
     [ProducesResponseType(503)]
-    public IActionResult GetUserRoleSets(GetUserRoleSetsRequest request)
-        => _OperationExecutor.Execute(_RolesOperations.GetUserRoleSets, request);
+    public IActionResult GetUserRoleSets()
+        => _OperationExecutor.Execute(_RolesOperations.GetUserRoleSets);
 
     /// <summary>
     /// Gets a user roleset by the user id and roleset name.
@@ -152,7 +152,7 @@ public class DefaultController : Controller
         => _OperationExecutor.Execute(_RolesOperations.RemoveRoleMember, request);
 
     /// <summary>
-    /// Gets whether a user has a roleset or not.
+    /// Gets whether a user has a specified roleset.
     /// </summary>
     /// <param name="request">The <see cref="GetUserRoleSetRequest"/></param>
     /// <response code="400">The roleset does not exist.</response>

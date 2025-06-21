@@ -10,7 +10,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation to create a new role set.
+/// Operation to create a new <see cref="RoleSet"/>.
 /// </summary>
 public class CreateRoleSetOperation : IResultOperation<ModifyRoleSetRequest, RoleSetPayload>
 {

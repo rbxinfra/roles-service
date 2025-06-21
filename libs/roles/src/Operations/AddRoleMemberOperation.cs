@@ -11,7 +11,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation for granting a user a role set.
+/// Operation for granting a <see cref="IUser"/> a <see cref="RoleSet"/>.
 /// </summary>
 public class AddRoleMemberOperation : IResultOperation<ModifyRoleMemberRequest, RoleSetPayload>
 {

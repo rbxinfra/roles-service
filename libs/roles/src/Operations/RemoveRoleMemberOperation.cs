@@ -10,7 +10,7 @@ using Models;
 using Entities;
 
 /// <summary>
-/// Operation for removing a user from a <see cref="RoleSet"/>.
+/// Operation for removing a User from a <see cref="RoleSet"/>.
 /// </summary>
 public class RemoveRoleMemberOperation : IOperation<ModifyRoleMemberRequest>
 {

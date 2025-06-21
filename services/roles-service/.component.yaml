@@ -9,7 +9,7 @@ build:
 
   docker:
     docker_file: Dockerfile
-    image_name: docker.artifactory.rbx.com/security-platform/roles-service
+    image_name: docker.artifactory.rbx.com/micro-services/roles-service
     
 deployment:
   count: 1
@@ -25,7 +25,7 @@ deployment:
     ENVIRONMENT: ${{ env.NOMAD_ENVIRONMENT }}
 
   containers: # Maps to the groups section in Nomad
-    - image: docker.artifactory.rbx.com/security-platform/roles-service
+    - image: docker.artifactory.rbx.com/micro-services/roles-service
       resources:
         cpu: ${{ env.NOMAD_CPU }}
         ram: ${{ env.NOMAD_RAM }}
